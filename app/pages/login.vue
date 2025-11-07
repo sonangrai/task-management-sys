@@ -1,13 +1,12 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: "auth",
+});
 useHead({
   title: "Login - TMS",
 });
-import { createClient } from "@supabase/supabase-js";
-const config = useRuntimeConfig();
-
-const supabaseUrl = "https://rddzkxizeppagxxdczmn.supabase.co";
-const supabaseKey = config.public.supabaseKey;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const route = useRoute();
+const supabase = useSupabaseClient();
 
 const email = ref<string>("");
 const otp = ref<string>("");
@@ -42,8 +41,10 @@ const handleVerify = async () => {
 
   if (error) console.log(error);
   else {
+    const returnUrl = route.query.returnUrl;
     verifying.value = false;
-    console.log(session);
+    if (returnUrl) await navigateTo(returnUrl as string);
+    else await navigateTo("/");
   }
 };
 </script>
@@ -51,7 +52,7 @@ const handleVerify = async () => {
 <template>
   <main class="h-[100dvh] flex justify-center items-center">
     <form
-      class="border border-green-500 rounded-md p-4 flex flex-col gap-4"
+      class="border border-green-500 rounded-md p-4 flex flex-col gap-4 w-[80%] max-w-[400px]"
       @submit.prevent="handleSubmit"
       v-if="otpGenerated.valueOf() == false"
     >
@@ -66,7 +67,7 @@ const handleVerify = async () => {
     </form>
 
     <form
-      class="border border-green-500 rounded-md p-4 flex flex-col gap-4"
+      class="border border-green-500 rounded-md p-4 flex flex-col gap-4 w-[80%] max-w-[400px]"
       @submit.prevent="handleVerify"
       v-else
     >

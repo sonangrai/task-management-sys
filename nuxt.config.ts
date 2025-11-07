@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-  modules: ["@pinia/nuxt", "@primevue/nuxt-module"],
+  modules: ["@pinia/nuxt", "@primevue/nuxt-module", "@nuxtjs/supabase"],
   vite: {
     plugins: [tailwindcss()],
   },
