@@ -7,6 +7,12 @@
       TMS
     </h1>
 
+    <div class="">
+      <NuxtLink to="/create">
+        <Button variant="link" size="small">Create Task</Button>
+      </NuxtLink>
+    </div>
+
     <Button
       icon="pi pi-sign-out"
       size="small"
