@@ -82,7 +82,7 @@ const buildData = tasks
             </h2>
           </div>
 
-          <div class="p-2 flex flex-col gap-2">
+          <div class="p-2 flex flex-col gap-2 max-h-[70vh] overflow-auto">
             <template v-if="state.data.length > 0">
               <card-task
                 v-for="task in state.data"
