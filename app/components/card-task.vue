@@ -2,6 +2,34 @@
 import type { TTask } from "~/type/task";
 
 const props = defineProps<{ task: TTask }>();
+
+let priorityColor = "secondary";
+
+switch (props.task.priority) {
+  case "urgent":
+    priorityColor = "danger";
+    break;
+
+  case "high":
+    priorityColor = "warn";
+    break;
+
+  case "medium":
+    priorityColor = "info";
+    break;
+
+  case "moderate":
+    priorityColor = "contrast";
+    break;
+
+  case "low":
+    priorityColor = "success";
+    break;
+
+  default:
+    priorityColor = "";
+    break;
+}
 </script>
 
 <template>
@@ -12,7 +40,7 @@ const props = defineProps<{ task: TTask }>();
 
     <p class="font-sm italic">Due: {{ props.task.due.slice(0, 10) }}</p>
 
-    <Tag severity="secondary" value="Secondary" rounded>{{
+    <Tag :severity="priorityColor" value="Secondary" rounded>{{
       props.task.priority
     }}</Tag>
   </div>
