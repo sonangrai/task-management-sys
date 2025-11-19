@@ -119,6 +119,8 @@ const handleSubmit = async () => {
     creating.value = false;
 
     data.value = initialData;
+
+    navigateTo("/");
   } catch {
     toast.add({
       severity: "error",
